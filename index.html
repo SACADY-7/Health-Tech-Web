@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HealthSaathi connects you with doctors, medicines, health awareness, government schemes, and wellness tips for better health.">
+  <meta name="keywords" content="telemedicine, health awareness, government schemes, wellness, HealthSaathi, healthcare">
+  <meta name="author" content="Phantom">
+  <title>HealthSaathi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f9fcff;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    /* Header Styles */
+    header {
+      background: #e6f3fa;
+      padding: 15px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #d4e6f1;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      float: left;
+    }
+
+    header img.logo {
+      max-width: 40px;
+      height: auto;
+      margin-right: 10px;
+    }
+
+    header h1 {
+      font-size: 2em;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    nav {
+      float: right;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #2c3e50;
+      font-size: 1.1em;
+      font-weight: 400;
+      padding: 8px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      background-color: #d4f4e2;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      font-size: 1.5em;
+      background: none;
+      border: none;
+      color: #2c3e50;
+      cursor: pointer;
+    }
+
+    #nav-toggle {
+      display: none;
+    }
+
+    nav {
+      transition: transform 0.3s ease;
+    }
+
+    /* Clearfix */
+    .clearfix::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Button Styles */
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1.1em;
+      transition: background-color 0.3s;
+    }
+
+    .btn-primary {
+      background-color: #3498db;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #2980b9;
+    }
+
+    /* Hero Section */
+    #home {
+      background: #e6f3fa;
+      padding: 100px 0 60px;
+      text-align: center;
+    }
+
+    #home h2 {
+      font-size: 2.5em;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    #home p {
+      font-size: 1.2em;
+      color: #555;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 60px 0;
+    }
+
+    section h2 {
+      font-size: 2.2em;
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    section p {
+      font-size: 1.1em;
+      color: #555;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+
+    /* Grid Styles */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      max-width: 120px;
+      height: auto;
+      margin-bottom: 15px;
+      border-radius: 5px;
+    }
+
+    .card h3 {
+      font-size: 1.4em;
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 1em;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    /* Search Section */
+    #search {
+      background: #d4f4e2;
+      padding: 40px 0;
+    }
+
+    .search-container {
+      max-width: 500px;
+      margin: auto;
+      position: relative;
+    }
+
+    #search input {
+      width: 100%;
+      padding: 12px 12px 12px 40px;
+      font-size: 1.1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #search input:focus {
+      outline: none;
+      border-color: #3498db;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      font-size: 1.2em;
+    }
+
+    .search-feedback {
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .search-feedback.active {
+      display: block;
+    }
+
+    /* Government Schemes Section */
+    #gov-scheme {
+      background: #f9fcff;
+    }
+
+    /* Contact Section */
+    #contact {
+      background: #e6f3fa;
+    }
+
+    .contact-form {
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #3498db;
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    /* Footer */
+    footer {
+      background: #2c3e50;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 1em;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      header {
+        padding: 10px 0;
+      }
+
+      .header-content {
+        float: none;
+        justify-content: center;
+      }
+
+      header img.logo {
+        max-width: 30px;
+      }
+
+      header h1 {
+        font-size: 1.5em;
+      }
+
+      nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #e6f3fa;
+        transform: translateY(-100%);
+      }
+
+      nav.active {
+        transform: translateY(0);
+      }
+
+      nav ul {
+        flex-direction: column;
+        padding: 10px 0;
+      }
+
+      nav ul li {
+        margin: 10px 0;
+      }
+
+      nav ul li a {
+        display: block;
+        text-align: center;
+        font-size: 1em;
+      }
+
+      .hamburger {
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 15px;
+      }
+
+      #home h2 {
+        font-size: 1.8em;
+      }
+
+      #home p {
+        font-size: 1em;
+      }
+
+      section h2 {
+        font-size: 1.8em;
+      }
+
+      section p {
+        font-size: 1em;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        font-size: 1em;
+        padding: 8px 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: 95%;
+      }
+
+      .card img {
+        max-width: 100px;
+      }
+
+      .card h3 {
+        font-size: 1.2em;
+      }
+
+      .card p {
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="clearfix">
+    <div class="container">
+      <div class="header-content">
+        <img src="https://via.placeholder.com/40x40?text=Logo" alt="HealthSaathi Logo" class="logo">
+        <h1>HealthSaathi</h1>
+      </div>
+      <button class="hamburger" aria-label="Toggle navigation">☰</button>
+      <input type="checkbox" id="nav-toggle" aria-hidden="true">
+      <nav>
+        <ul>
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#awareness">Awareness</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#gov-scheme">Gov Schemes</a></li>
+          <li><a href="#consultation">Consultation</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Home Section -->
+  <section id="home">
+    <div class="container">
+      <h2>Your Health Companion</h2>
+      <p>Access healthcare services, wellness tips, government schemes, and consultations easily.</p>
+      <a href="#services" class="btn btn-primary">Explore Now</a>
+    </div>
+  </section>
+
+  <!-- Search Section -->
+  <section id="search">
+    <div class="container">
+      <div class="search-container">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="text" id="search-input" placeholder="Search services, schemes, or tips..." aria-label="Search" oninput="filterContent(this.value)">
+      </div>
+      <p id="search-feedback" class="search-feedback">No results for "<span id="query"></span>". Try another keyword.</p>
+    </div>
+  </section>
+
+  <!-- Awareness Section -->
+  <section id="awareness">
+    <div class="container">
+      <h2>Health Awareness</h2>
+      <p>Learn about staying healthy and preventing diseases.</p>
+      <div class="grid">
+        <div class="card" data-title="Disease Prevention">
+          <img src="https://via.placeholder.com/120x120?text=Prevention" alt="Disease prevention">
+          <h3>Disease Prevention</h3>
+          <p>Tips to protect yourself from common illnesses.</p>
+          <a href="https://www.cdc.gov/chronic-disease/prevention/index.html" class="btn btn-primary">Read More</a>
+        </div>
+        <div class="card" data-title="Hygiene Practices">
+          <img src="https://via.placeholder.com/120x120?text=Hygiene" alt="Hygiene practices">
+          <h3>Hygiene Practices</h3>
+          <p>Best practices for personal hygiene.</p>
+          <a href="https://www.healthdirect.gov.au/personal-hygiene" class="btn btn-primary">Read More</a>
+        </div>
+        <div class="card" data-title="Vaccinations">
+          <img src="https://via.placeholder.com/120x120?text=Vaccines" alt="Vaccinations">
+          <h3>Vaccinations</h3>
+          <p>Importance of timely vaccinations.</p>
+          <a href="https://www.cdc.gov/vaccines/index.html" class="btn btn-primary">Read More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services">
+    <div class="container">
+      <h2>Our Services</h2>
+      <p>Explore healthcare services and wellness resources.</p>
+      <div class="grid">
+        <div class="card" data-title="Medicines">
+          <img src="https://via.placeholder.com/120x120?text=Medicines" alt="Medicines">
+          <h3>Medicines</h3>
+          <p>Order medicines online with ease.</p>
+          <a href="https://www.1mg.com" class="btn btn-primary">Shop Now</a>
+        </div>
+        <div class="card" data-title="Wellness Tips">
+          <img src="https://via.placeholder.com/120x120?text=Wellness" alt="Wellness tips">
+          <h3>Wellness Tips</h3>
+          <p>Improve your health with expert advice.</p>
+          <a href="https://www.who.int/news-room/fact-sheets/detail/healthy-diet" class="btn btn-primary">Learn More</a>
+        </div>
+        <div class="card" data-title="DIY Remedies">
+          <img src="https://via.placeholder.com/120x120?text=Remedies" alt="DIY remedies">
+          <h3>DIY Remedies</h3>
+          <p>Natural solutions for everyday health.</p>
+          <a href="https://www.webmd.com/balance/ss/slideshow-home-remedies" class="btn btn-primary">Explore</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Government Schemes Section -->
+  <section id="gov-scheme">
+    <div class="container">
+      <h2>Government Schemes</h2>
+      <p>Discover government initiatives for healthcare and support.</p>
+      <div class="grid">
+        <div class="card" data-title="Ayushman Bharat">
+          <img src="https://via.placeholder.com/120x120?text=Ayushman" alt="Ayushman Bharat">
+          <h3>Ayushman Bharat</h3>
+          <p>Free healthcare coverage for eligible families.</p>
+          <a href="https://pmjay.gov.in/" class="btn btn-primary">Learn More</a>
+        </div>
+        <div class="card" data-title="Janani Suraksha">
+          <img src="https://via.placeholder.com/120x120?text=Janani" alt="Janani Suraksha">
+          <h3>Janani Suraksha</h3>
+          <p>Support for safe motherhood and child health.</p>
+          <a href="https://www.nhm.gov.in/index1.php?lang=1&level=3&sublinkid=841&lid=309" class="btn btn-primary">Learn More</a>
+        </div>
+        <div class="card" data-title="National Health Mission">
+          <img src="https://via.placeholder.com/120x120?text=NHM" alt="National Health Mission">
+          <h3>National Health Mission</h3>
+          <p>Improving healthcare access in rural areas.</p>
+          <a href="https://nhm.gov.in/" class="btn btn-primary">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Consultation Section -->
+  <section id="consultation">
+    <div class="container">
+      <h2>Book a Consultation</h2>
+      <p>Connect with doctors online or in-person.</p>
+      <div class="grid">
+        <div class="card" data-title="Online Consultation">
+          <img src="https://via.placeholder.com/120x120?text=Online" alt="Online consultation">
+          <h3>Online Consultation</h3>
+          <p>Consult doctors from home.</p>
+          <a href="https://www.practo.com/consult" class="btn btn-primary">Book Now</a>
+        </div>
+        <div class="card" data-title="In-Person Booking">
+          <img src="https://via.placeholder.com/120x120?text=In-Person" alt="In-person booking">
+          <h3>In-Person Booking</h3>
+          <p>Schedule a face-to-face visit.</p>
+          <a href="#contact" class="btn btn-primary">Book Now</a>
+        </div>
+        <div class="card" data-title="Find Nearby">
+          <img src="https://via.placeholder.com/120x120?text=Map" alt="Find nearby">
+          <h3>Find Nearby</h3>
+          <p>Locate doctors and clinics near you.</p>
+          <a href="https://www.google.com/maps/search/doctors+near+me" class="btn btn-primary">Search</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p>Reach out for support or inquiries.</p>
+      <div class="contact-form">
+        <input type="text" id="name" placeholder="Your Name" required aria-label="Name">
+        <input type="email" id="email" placeholder="Your Email" required aria-label="Email">
+        <textarea id="message" placeholder="Your Message" required aria-label="Message"></textarea>
+        <button class="btn btn-primary" onclick="submitContact()">Send</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 HealthSaathi | Designed by Phantom</p>
+    </div>
+  </footer>
+
+  <script>
+    // Hamburger Menu Toggle
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('nav');
+    const navToggle = document.getElementById('nav-toggle');
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      navToggle.checked = !navToggle.checked;
+    });
+
+    // Close menu on link click
+    document.querySelectorAll('nav ul li a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        navToggle.checked = false;
+      });
+    });
+
+    // Search Filter
+    function filterContent(query) {
+      const cards = document.querySelectorAll('.card');
+      const feedback = document.getElementById('search-feedback');
+      const querySpan = document.getElementById('query');
+      let hasResults = false;
+      cards.forEach(card => {
+        const title = card.getAttribute('data-title').toLowerCase();
+        const desc = card.querySelector('p').textContent.toLowerCase();
+        if (title.includes(query.toLowerCase()) || desc.includes(query.toLowerCase())) {
+          card.style.display = 'block';
+          hasResults = true;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      querySpan.textContent = query;
+      feedback.classList.toggle('active', !hasResults && query.length > 0);
+    }
+
+    // Contact Form Submission
+    function submitContact() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+      if (name && email && message) {
+        alert('Message sent successfully!');
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('message').value = '';
+      } else {
+        alert('Please fill all fields.');
+      }
+    }
+
+    // Active Nav Highlight
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('nav ul li a');
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (window.scrollY >= sectionTop - 60) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
