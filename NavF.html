@@ -24,7 +24,7 @@
       background: linear-gradient(135deg, #e6f0fa 0%, #e6faf5 100%);
       scroll-behavior: smooth;
       transition: background-color 0.3s, color 0.3s;
-      padding-top: clamp(60px, 10vw, 80px); /* Added to offset fixed header */
+      padding-top: clamp(60px, 10vw, 80px);
     }
 
     .dark-mode {
@@ -101,10 +101,11 @@
       color: #fff;
       padding: 8px 0;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      position: fixed; /* Changed to fixed */
-      top: 0; /* Pinned to top */
-      width: 100%; /* Full width */
-      z-index: 100; /* Ensure above other content */
+      margin-bottom: 20px;
+      z-index: 100;
+      position: fixed;
+      top: 0;
+      width: 100%;
     }
 
     .header-inner {
@@ -603,14 +604,23 @@
     .medicine-card img,
     .wellness-card img,
     .diy-card img,
-    .health-tip-card img,
-    .testimonial-card img {
+    .health-tip-card img {
       width: 100%;
       max-width: clamp(120px, 20vw, 150px);
       height: auto;
       margin-bottom: 15px;
       border-radius: 8px;
       object-fit: cover;
+    }
+
+    .testimonial-card img {
+      width: clamp(80px, 12vw, 100px);
+      height: clamp(80px, 12vw, 100px);
+      max-width: clamp(80px, 12vw, 100px);
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 15px;
     }
 
     /* General Section Styles */
@@ -779,11 +789,6 @@
       padding: clamp(15px, 2vw, 20px);
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .testimonial-card img {
-      border-radius: 50%;
-      max-width: clamp(60px, 10vw, 80px);
     }
 
     .testimonial-card p {
@@ -1277,7 +1282,7 @@
           <a href="https://www.1mg.com/categories/over-the-counter-175" class="btn btn-secondary">Shop Now</a>
         </div>
         <div class="medicine-card" data-title="Prescription Drugs" data-aos="zoom-in" data-aos-delay="100">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:RX55bg6JOSImRgyHwHfb8iyaV6TlIVJFHLY2Q&s" alt="Prescription medications" loading="lazy">
+          <img src="https://media.istockphoto.com/id/1190193669/photo/doctor-filling-out-a-prescription.jpg?s=612x612&w=0&k=20&c=DUtf8Yt9fl--E-KQdRQjwrRdRHmoev-mSUPd8tdGrRM=" alt="Prescription medications" loading="lazy">
           <h3>Prescription Drugs</h3>
           <p>Order prescribed medications with a valid prescription.</p>
           <a href="https://www.1mg.com/order-with-prescription/" class="btn btn-secondary">Shop Now</a>
@@ -1383,22 +1388,22 @@
       <p>Simple tips to boost your health and wellness.</p>
       <div class="health-tips-grid">
         <div class="health-tip-card">
-          <img src="hydrate.jpg" alt="Stay Hydrated" loading="lazy">
+          <img src="watert.jpeg" alt="Stay Hydrated" loading="lazy">
           <h3>Stay Hydrated</h3>
           <p>Drink at least 8 glasses of water daily to keep your body functioning optimally.</p>
         </div>
         <div class="health-tip-card">
-          <img src="sleep.jpg" alt="Get Enough Sleep" loading="lazy">
+          <img src="slept.jpeg" alt="Get Enough Sleep" loading="lazy">
           <h3>Get Enough Sleep</h3>
           <p>Aim for 7-9 hours of sleep per night to improve mental and physical health.</p>
         </div>
         <div class="health-tip-card">
-          <img src="exercise.jpg" alt="Stay Active" loading="lazy">
+          <img src="runmw.jpeg" alt="Stay Active" loading="lazy">
           <h3>Stay Active</h3>
           <p>Engage in at least 30 minutes of moderate exercise 5 days a week.</p>
         </div>
         <div class="health-tip-card">
-          <img src="diet.jpg" alt="Eat Balanced Meals" loading="lazy">
+          <img src="Balancedietm.jpeg" alt="Eat Balanced Meals" loading="lazy">
           <h3>Eat Balanced Meals</h3>
           <p>Include a variety of fruits, vegetables, lean proteins, and whole grains in your diet.</p>
         </div>
@@ -1414,21 +1419,21 @@
       <div class="testimonials-slideshow">
         <div class="testimonial-slide active">
           <div class="testimonial-card">
-            <img src="user1.jpg" alt="User 1" loading="lazy">
+            <img src="tp1.jpeg" alt="User 1" loading="lazy">
             <p>"PRANIX made it so easy to connect with a doctor and get my medications delivered!"</p>
             <h4>Jane Doe</h4>
           </div>
         </div>
         <div class="testimonial-slide">
           <div class="testimonial-card">
-            <img src="user2.jpg" alt="User 2" loading="lazy">
+            <img src="pt2.jpeg" alt="User 2" loading="lazy">
             <p>"The health tips and DIY remedies have been a game-changer for my family."</p>
-            <h4>John Smith</h4>
+            <h4>Sophia Smith</h4>
           </div>
         </div>
         <div class="testimonial-slide">
           <div class="testimonial-card">
-            <img src="user3.jpg" alt="User 3" loading="lazy">
+            <img src="pt3.jpeg" alt="User 3" loading="lazy">
             <p>"Thanks to PRANIX, I learned about government schemes that helped me save on medical costs."</p>
             <h4>Emily Johnson</h4>
           </div>
