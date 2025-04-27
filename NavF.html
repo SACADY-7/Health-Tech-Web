@@ -23,14 +23,41 @@
       color: #333;
       background: linear-gradient(135deg, #e6f0fa 0%, #e6faf5 100%);
       scroll-behavior: smooth;
-      padding-top: 70px; /* Added to prevent overlap with fixed header */
+      transition: background-color 0.3s, color 0.3s;
+      padding-top: clamp(60px, 10vw, 80px); /* Added to offset fixed header */
+    }
+
+    .dark-mode {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+      color: #e0e0e0;
+    }
+
+    .dark-mode header,
+    .dark-mode footer,
+    .dark-mode #contact {
+      background: linear-gradient(to right, #2c3e50, #34495e);
+    }
+
+    .dark-mode .btn-primary {
+      background-color: #3498db;
+    }
+
+    .dark-mode .btn-primary:hover {
+      background-color: #2980b9;
+    }
+
+    .dark-mode .btn-secondary {
+      background-color: #2ecc71;
+    }
+
+    .dark-mode .btn-secondary:hover {
+      background-color: #27ae60;
     }
 
     .container {
       width: 90%;
       max-width: 1200px;
       margin: auto;
-      overflow: hidden;
       padding: 0 15px;
     }
 
@@ -74,10 +101,10 @@
       color: #fff;
       padding: 8px 0;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      position: fixed; /* Fixed at top */
-      top: 0;
-      width: 100%;
-      z-index: 100;
+      position: fixed; /* Changed to fixed */
+      top: 0; /* Pinned to top */
+      width: 100%; /* Full width */
+      z-index: 100; /* Ensure above other content */
     }
 
     .header-inner {
@@ -96,28 +123,31 @@
     }
 
     .logo-container img {
-      width: 70px;
-      height: 70px;
+      width: clamp(50px, 8vw, 70px);
+      height: clamp(50px, 8vw, 70px);
       border-radius: 50%;
       object-fit: cover;
       margin-right: 6px;
     }
 
     header h1 {
-      font-size: 1.6em;
+      font-size: clamp(1.2em, 3vw, 1.6em);
       font-weight: 700;
       letter-spacing: 1px;
+    }
+
+    /* Navigation Bar */
+    nav {
+      display: flex;
+      align-items: center;
+      gap: clamp(10px, 2vw, 15px);
     }
 
     nav ul {
       list-style: none;
       display: flex;
+      gap: clamp(10px, 2vw, 15px);
       align-items: center;
-      justify-content: flex-end;
-    }
-
-    nav ul li {
-      margin-left: 6px;
     }
 
     nav ul li a {
@@ -128,7 +158,8 @@
       padding: clamp(4px, 0.8vw, 6px) clamp(8px, 1.8vw, 12px);
       border-radius: 25px;
       background-color: rgba(255, 255, 255, 0.1);
-      transition: background-color 0.3s, transform 0.3s, color 0.3s;
+      transition: background-color 0.3s, transform 0.3s, color 0.3s, box-shadow 0.3s;
+      display: inline-block;
     }
 
     nav ul li a:hover,
@@ -136,36 +167,105 @@
       background-color: #00C896;
       color: #fff;
       transform: scale(1.05);
+      box-shadow: 0 2px 8px rgba(0, 200, 150, 0.4);
     }
 
-    /* Hamburger Menu */
+    /* Hamburger Button */
     .hamburger {
-      display: none;
-      font-size: 1.6em;
+      font-size: clamp(1.3em, 3vw, 1.6em);
       background: none;
       border: none;
       color: #fff;
       cursor: pointer;
-      margin-left: 8px;
-      line-height: 1;
+      padding: 8px;
+      z-index: 101;
     }
 
-    #nav-toggle {
+    /* Hamburger Menu */
+    .hamburger-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #1565C0;
+      z-index: 100;
+    }
+
+    .hamburger-menu.active {
+      display: block;
+    }
+
+    .hamburger-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      padding: 12px 0;
+      text-align: center;
+    }
+
+    .hamburger-menu ul li {
+      margin: 6px 0;
+    }
+
+    .hamburger-menu ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      font-weight: 500;
+      padding: clamp(6px, 1vw, 8px) clamp(12px, 2vw, 16px);
+      border-radius: 25px;
+      background-color: rgba(255, 255, 255, 0.1);
+      transition: background-color 0.3s, transform 0.3s, color 0.3s, box-shadow 0.3s;
+      display: inline-block;
+      min-width: 120px;
+    }
+
+    .hamburger-menu ul li a:hover {
+      background-color: #00C896;
+      color: #fff;
+      transform: scale(1.05);
+      box-shadow: 0 2px 8px rgba(0, 200, 150, 0.4);
+    }
+
+    /* Dark Mode Toggle */
+    .dark-mode-toggle {
+      display: flex;
+      align-items: center;
+    }
+
+    .dark-mode-toggle i {
+      font-size: clamp(1em, 2vw, 1.2em);
+      color: #fff;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .dark-mode-toggle .fa-sun {
+      display: inline;
+    }
+
+    .dark-mode-toggle .fa-moon {
       display: none;
     }
 
-    nav {
-      transition: transform 0.3s ease;
+    .dark-mode .dark-mode-toggle .fa-sun {
+      display: none;
+    }
+
+    .dark-mode .dark-mode-toggle .fa-moon {
+      display: inline;
     }
 
     /* Button Styles */
     .btn {
       display: inline-block;
-      padding: 12px 24px;
+      padding: clamp(10px, 1.5vw, 12px) clamp(20px, 3vw, 24px);
       text-decoration: none;
       border-radius: 25px;
-      font-size: 1.1em;
+      font-size: clamp(1em, 1.5vw, 1.1em);
       transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+      text-align: center;
     }
 
     .btn-primary {
@@ -190,6 +290,93 @@
       box-shadow: 0 4px 12px rgba(0, 200, 150, 0.4);
     }
 
+    /* Animation Keyframes */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .animate-slide-in {
+      opacity: 0;
+      animation: slideIn 0.6s ease-out forwards;
+    }
+
+    /* Section Backgrounds */
+    #home {
+      background: linear-gradient(to bottom, rgba(30, 144, 255, 0.15), rgba(0, 200, 150, 0.15));
+    }
+
+    #search {
+      background: linear-gradient(to bottom, rgba(30, 144, 255, 0.25), rgba(0, 200, 150, 0.25));
+    }
+
+    #awareness {
+      background: linear-gradient(to bottom, rgba(30, 144, 255, 0.18), rgba(0, 200, 150, 0.18));
+    }
+
+    #telemedicine {
+      background: linear-gradient(to bottom, rgba(30, 144, 255, 0.22), rgba(0, 200, 150, 0.22));
+    }
+
+    #gov-scheme {
+      background: linear-gradient(to bottom, rgba(30, 144, 255, 0.16), rgba(0, 200, 150, 0.16));
+    }
+
+    #wellness {
+      background: linear-gradient(to bottom, rgba(30, 144, 255, 0.2), rgba(0, 200, 150, 0.2));
+    }
+
+    #diy {
+      background: linear-gradient(to bottom, rgba(30, 144, 255, 0.19), rgba(0, 200, 150, 0.19));
+    }
+
+    #health-tips {
+      background: linear-gradient(to bottom, rgba(30, 144, 255, 0.17), rgba(0, 200, 150, 0.17));
+    }
+
+    #testimonials {
+      background: linear-gradient(to bottom, rgba(30, 144, 255, 0.21), rgba(0, 200, 150, 0.21));
+    }
+
+    #faq {
+      background: linear-gradient(to bottom, rgba(30, 144, 255, 0.15), rgba(0, 200, 150, 0.15));
+    }
+
+    .dark-mode #home,
+    .dark-mode #search,
+    .dark-mode #awareness,
+    .dark-mode #telemedicine,
+    .dark-mode #gov-scheme,
+    .dark-mode #wellness,
+    .dark-mode #diy,
+    .dark-mode #health-tips,
+    .dark-mode #testimonials,
+    .dark-mode #faq {
+      background: linear-gradient(to bottom, rgba(52, 73, 94, 0.3), rgba(44, 62, 80, 0.3));
+    }
+
     /* Slideshow in Home Section */
     #home {
       position: relative;
@@ -200,7 +387,7 @@
     .slideshow-container {
       position: relative;
       width: 100%;
-      height: 600px;
+      height: clamp(300px, 50vw, 600px);
       overflow: hidden;
     }
 
@@ -227,13 +414,13 @@
 
     .slide-content {
       background: rgba(0, 0, 0, 0.5);
-      padding: 30px;
+      padding: clamp(20px, 3vw, 30px);
       border-radius: 12px;
-      max-width: 800px;
+      max-width: clamp(600px, 80vw, 800px);
     }
 
     .slide-content h2 {
-      font-size: 3.8em;
+      font-size: clamp(2em, 5vw, 3.8em);
       margin-bottom: 20px;
       font-weight: 700;
       letter-spacing: 1.5px;
@@ -241,7 +428,7 @@
     }
 
     .slide-content p {
-      font-size: 1.6em;
+      font-size: clamp(1.1em, 2vw, 1.6em);
       margin-bottom: 30px;
       font-weight: 400;
       font-style: italic;
@@ -254,6 +441,7 @@
       transform: translateX(-50%);
       display: flex;
       gap: 10px;
+      z-index: 10;
     }
 
     .dot {
@@ -278,21 +466,21 @@
       right: 20px;
       background: linear-gradient(to right, #1E90FF, #00C896);
       color: white;
-      width: 40px;
-      height: 40px;
+      width: clamp(40px, 6vw, 50px);
+      height: clamp(40px, 6vw, 50px);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      font-size: 14px;
+      font-size: clamp(14px, 2vw, 16px);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s, box-shadow 0.3s;
       z-index: 150;
     }
 
     .chatbot-btn i {
-      font-size: 16px;
+      font-size: clamp(14px, 2vw, 16px);
     }
 
     .chatbot-btn:hover {
@@ -307,10 +495,10 @@
       left: 20px;
       background: linear-gradient(to right, #00C896, #1E90FF);
       color: white;
-      padding: 15px 20px;
+      padding: clamp(12px, 2vw, 15px) clamp(15px, 3vw, 20px);
       border-radius: 50px;
       text-decoration: none;
-      font-size: 1.1em;
+      font-size: clamp(0.9em, 1.5vw, 1.1em);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s, box-shadow 0.3s;
       z-index: 150;
@@ -323,24 +511,29 @@
 
     /* Search Section */
     #search {
-      padding: 30px 0;
-      background-color: #f8f9fa;
+      padding: clamp(20px, 5vw, 30px) 0;
       text-align: center;
     }
 
     #search .search-container {
       position: relative;
-      max-width: 500px;
+      max-width: clamp(300px, 60vw, 500px);
       margin: auto;
     }
 
     #search input {
       width: 100%;
-      padding: 12px 12px 12px 40px;
-      font-size: 1.1em;
+      padding: clamp(10px, 1.5vw, 12px) clamp(10px, 1.5vw, 12px) clamp(10px, 1.5vw, 12px) clamp(30px, 5vw, 40px);
+      font-size: clamp(0.9em, 1.5vw, 1.1em);
       border: 1px solid #ccc;
       border-radius: 25px;
       transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .dark-mode #search input {
+      background-color: #34495e;
+      border-color: #34495e;
+      color: #e0e0e0;
     }
 
     #search input:focus {
@@ -355,11 +548,11 @@
       top: 50%;
       transform: translateY(-50%);
       color: #666;
-      font-size: 1.2em;
+      font-size: clamp(1em, 1.5vw, 1.2em);
     }
 
     #search .search-feedback {
-      font-size: 0.9em;
+      font-size: clamp(0.8em, 1.2vw, 0.9em);
       color: #666;
       margin-top: 10px;
       display: none;
@@ -374,19 +567,33 @@
     .gov-scheme-card,
     .medicine-card,
     .wellness-card,
-    .diy-card {
+    .diy-card,
+    .health-tip-card,
+    .testimonial-card {
       background-color: white;
-      padding: 20px;
+      padding: clamp(15px, 2vw, 20px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       border-radius: 12px;
       transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .dark-mode .awareness-card,
+    .dark-mode .gov-scheme-card,
+    .dark-mode .medicine-card,
+    .dark-mode .wellness-card,
+    .dark-mode .diy-card,
+    .dark-mode .health-tip-card,
+    .dark-mode .testimonial-card {
+      background-color: #34495e;
     }
 
     .awareness-card:hover,
     .gov-scheme-card:hover,
     .medicine-card:hover,
     .wellness-card:hover,
-    .diy-card:hover {
+    .diy-card:hover,
+    .health-tip-card:hover,
+    .testimonial-card:hover {
       transform: translateY(-5px) scale(1.02);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
@@ -395,9 +602,11 @@
     .gov-scheme-card img,
     .medicine-card img,
     .wellness-card img,
-    .diy-card img {
+    .diy-card img,
+    .health-tip-card img,
+    .testimonial-card img {
       width: 100%;
-      max-width: 150px;
+      max-width: clamp(120px, 20vw, 150px);
       height: auto;
       margin-bottom: 15px;
       border-radius: 8px;
@@ -410,9 +619,11 @@
     #telemedicine,
     #wellness,
     #diy,
-    #find-nearby,
-    #contact {
-      padding: 80px 0;
+    #contact,
+    #testimonials,
+    #faq,
+    #health-tips {
+      padding: clamp(50px, 8vw, 80px) 0;
     }
 
     #awareness h2,
@@ -420,9 +631,11 @@
     #telemedicine h2,
     #wellness h2,
     #diy h2,
-    #find-nearby h2 {
+    #testimonials h2,
+    #faq h2,
+    #health-tips h2 {
       text-align: center;
-      font-size: 2.8em;
+      font-size: clamp(2em, 4vw, 2.8em);
       margin-bottom: 20px;
       color: #1E90FF;
       font-weight: 700;
@@ -431,11 +644,15 @@
 
     #contact h2 {
       text-align: center;
-      font-size: 2.8em;
+      font-size: clamp(2em, 4vw, 2.8em);
       margin-bottom: 20px;
       color: #fff;
       font-weight: 700;
       letter-spacing: 1px;
+    }
+
+    .dark-mode h2 {
+      color: #3498db;
     }
 
     #awareness p,
@@ -443,12 +660,14 @@
     #telemedicine p,
     #wellness p,
     #diy p,
-    #find-nearby p,
-    #contact p {
+    #contact p,
+    #testimonials p,
+    #faq p,
+    #health-tips p {
       text-align: center;
-      font-size: 1.2em;
+      font-size: clamp(1em, 1.5vw, 1.2em);
       margin-bottom: 40px;
-      max-width: 800px;
+      max-width: clamp(600px, 80vw, 800px);
       margin-left: auto;
       margin-right: auto;
       font-weight: 300;
@@ -459,10 +678,11 @@
     .gov-scheme-grid,
     .medicine-grid,
     .wellness-grid,
-    .diy-grid {
+    .diy-grid,
+    .health-tips-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(clamp(220px, 25vw, 250px), 1fr));
+      gap: clamp(20px, 3vw, 30px);
       text-align: center;
     }
 
@@ -470,33 +690,9 @@
     .telemedicine-actions {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: clamp(15px, 2vw, 20px);
       margin-bottom: 40px;
       flex-wrap: wrap;
-    }
-
-    /* Find Nearby Section */
-    .map-container {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      margin: auto;
-      height: 400px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    #map {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .map-fallback {
-      width: 100%;
-      height: 100%;
-      display: none;
     }
 
     /* Contact Section */
@@ -505,26 +701,20 @@
       color: white;
     }
 
-    .contact-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: start;
-    }
-
-    .contact-details,
-    .contact-form {
+    .contact-details {
       background: rgba(255, 255, 255, 0.1);
-      padding: 30px;
+      padding: clamp(20px, 3vw, 30px);
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      margin: auto;
+      max-width: clamp(400px, 60vw, 600px);
     }
 
-    .contact-details h3,
-    .contact-form h3 {
-      font-size: 1.8em;
+    .contact-details h3 {
+      font-size: clamp(1.5em, 2vw, 1.8em);
       margin-bottom: 20px;
       font-weight: 600;
+      text-align: center;
     }
 
     .contact-details ul {
@@ -533,7 +723,8 @@
 
     .contact-details li {
       margin-bottom: 15px;
-      font-size: 1.1em;
+      font-size: clamp(0.9em, 1.5vw, 1.1em);
+      text-align: center;
     }
 
     .contact-details a {
@@ -541,12 +732,13 @@
       text-decoration: none;
       display: flex;
       align-items: center;
+      justify-content: center;
       transition: color 0.3s, transform 0.3s;
     }
 
     .contact-details a i {
       margin-right: 10px;
-      font-size: 1.2em;
+      font-size: clamp(1em, 1.5vw, 1.2em);
     }
 
     .contact-details a:hover {
@@ -554,71 +746,181 @@
       transform: scale(1.05);
     }
 
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 12px;
+    .contact-button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    /* Testimonials Section */
+    #testimonials {
+      padding: clamp(50px, 8vw, 80px) 0;
+    }
+
+    .testimonials-slideshow {
+      position: relative;
+      max-width: clamp(400px, 80vw, 600px);
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .testimonial-slide {
+      display: none;
+      text-align: center;
+      padding: clamp(15px, 2vw, 20px);
+    }
+
+    .testimonial-slide.active {
+      display: block;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .testimonial-card {
+      background-color: white;
+      padding: clamp(15px, 2vw, 20px);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .testimonial-card img {
+      border-radius: 50%;
+      max-width: clamp(60px, 10vw, 80px);
+    }
+
+    .testimonial-card p {
+      font-style: italic;
+      margin: 15px 0;
+      font-size: clamp(0.9em, 1.5vw, 1em);
+    }
+
+    .testimonial-card h4 {
+      font-size: clamp(1em, 1.5vw, 1.2em);
+      color: #1E90FF;
+    }
+
+    .testimonial-dots {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .testimonial-dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background: #ccc;
+      border-radius: 50%;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .testimonial-dot.active {
+      background: #00C896;
+    }
+
+    /* FAQ Section */
+    #faq {
+      padding: clamp(50px, 8vw, 80px) 0;
+    }
+
+    .faq-item {
       margin-bottom: 15px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1em;
-      background: rgba(255, 255, 255, 0.9);
-      transition: box-shadow 0.3s, background 0.3s;
+      border-bottom: 1px solid #eee;
     }
 
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      outline: none;
-      box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-      background: #fff;
+    .dark-mode .faq-item {
+      border-bottom: 1px solid #4a6076;
     }
 
-    .contact-form textarea {
-      resize: vertical;
-      min-height: 100px;
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(10px, 1.5vw, 15px);
+      cursor: pointer;
+      font-size: clamp(1em, 1.5vw, 1.2em);
+      font-weight: 600;
+      transition: color 0.3s;
     }
 
-    .contact-form button {
-      width: 100%;
-      padding: 12px;
-      font-size: 1.1em;
+    .faq-question:hover {
+      color: #1E90FF;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 clamp(10px, 1.5vw, 15px);
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .faq-answer.active {
+      max-height: 200px;
+      padding: clamp(10px, 1.5vw, 15px);
+    }
+
+    .faq-toggle {
+      font-size: clamp(1em, 1.5vw, 1.2em);
+      transition: transform 0.3s;
+    }
+
+    .faq-toggle.active {
+      transform: rotate(45deg);
+    }
+
+    /* Health Tips Section */
+    #health-tips {
+      padding: clamp(50px, 8vw, 80px) 0;
+    }
+
+    .health-tip-card h3 {
+      font-size: clamp(1.2em, 2vw, 1.5em);
+      margin-bottom: 10px;
+      color: #1E90FF;
+    }
+
+    .health-tip-card p {
+      font-size: clamp(0.9em, 1.5vw, 1em);
     }
 
     /* Footer */
     footer {
       background: linear-gradient(to right, #1E90FF, #00C896);
       color: #fff;
-      padding: 20px 0;
+      padding: clamp(30px, 5vw, 40px) 0;
       text-align: center;
     }
 
+    .footer-content {
+      margin-bottom: 20px;
+    }
+
+    .footer-about {
+      text-align: center;
+      max-width: clamp(400px, 80vw, 600px);
+      margin: auto;
+    }
+
+    .footer-about h3 {
+      font-size: clamp(1.2em, 2vw, 1.5em);
+      margin-bottom: 10px;
+    }
+
+    .footer-about p {
+      font-size: clamp(0.9em, 1.5vw, 1em);
+      line-height: 1.6;
+    }
+
     footer p {
-      font-size: 1em;
+      font-size: clamp(0.9em, 1.5vw, 1em);
       font-weight: 300;
     }
 
     /* Responsive Design */
-    @media (min-width: 1200px) {
-      .logo-container img {
-        width: 80px;
-        height: 80px;
-      }
-
-      header h1 {
-        font-size: 1.8em;
-      }
-
-      nav ul li {
-        margin-left: 10px;
-      }
-
-      nav ul li a {
-        font-size: clamp(1rem, 1.8vw, 1.1rem);
-        padding: clamp(6px, 1vw, 8px) clamp(12px, 2.2vw, 16px);
-      }
-    }
-
     @media (min-width: 1600px) {
+      .container {
+        max-width: 1400px;
+      }
+
       .logo-container img {
         width: 90px;
         height: 90px;
@@ -628,13 +930,39 @@
         font-size: 2em;
       }
 
-      nav ul li {
-        margin-left: 12px;
+      nav ul li a,
+      .hamburger {
+        font-size: 1.2rem;
+        padding: 10px 20px;
       }
 
-      nav ul li a {
-        font-size: clamp(1.1rem, 2vw, 1.2rem);
-        padding: clamp(8px, 1.2vw, 10px) clamp(16px, 2.5vw, 20px);
+      .slideshow-container {
+        height: 700px;
+      }
+
+      .slide-content h2 {
+        font-size: 4.2em;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .container {
+        width: 85%;
+      }
+
+      .logo-container img {
+        width: 80px;
+        height: 80px;
+      }
+
+      header h1 {
+        font-size: 1.8em;
+      }
+
+      nav ul li a,
+      .hamburger {
+        font-size: 1.1rem;
+        padding: 8px 16px;
       }
     }
 
@@ -654,18 +982,9 @@
       .slide-content p {
         font-size: 1.3em;
       }
-
-      .contact-container {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
     }
 
     @media (max-width: 768px) {
-      body {
-        padding-top: 60px; /* Adjusted for smaller header */
-      }
-
       header {
         padding: 6px 0;
       }
@@ -683,40 +1002,20 @@
         font-size: 1.4em;
       }
 
-      nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: #1565C0;
-        transform: translateY(-100%);
-        z-index: 100;
-      }
-
-      nav.active {
-        transform: translateY(0);
-      }
-
       nav ul {
-        flex-direction: column;
-        padding: 12px 0;
-        text-align: center;
+        flex-wrap: wrap;
         justify-content: center;
       }
 
-      nav ul li {
-        margin: 6px 0;
-      }
-
-      nav ul li a {
-        font-size: 0.8em;
-        padding: 8px 15px;
-        display: inline-block;
-      }
-
+      nav ul li a,
       .hamburger {
-        display: block;
-        font-size: 1.4em;
+        font-size: 0.9em;
+        padding: 8px 15px;
+      }
+
+      .hamburger-menu ul li a {
+        font-size: 0.9em;
+        padding: 8px 15px;
       }
 
       .slideshow-container {
@@ -740,24 +1039,17 @@
       .gov-scheme-grid,
       .medicine-grid,
       .wellness-grid,
-      .diy-grid {
+      .diy-grid,
+      .health-tips-grid {
         grid-template-columns: 1fr;
       }
 
       .chatbot-btn {
         bottom: 80px;
       }
-
-      .map-container {
-        height: 300px;
-      }
     }
 
     @media (max-width: 480px) {
-      body {
-        padding-top: 50px; /* Adjusted for smallest header */
-      }
-
       header {
         padding: 5px 0;
       }
@@ -775,6 +1067,12 @@
         font-size: 1.3em;
       }
 
+      nav ul li a,
+      .hamburger-menu ul li a {
+        font-size: 0.8em;
+        padding: 6px 12px;
+      }
+
       .slideshow-container {
         height: 300px;
       }
@@ -788,17 +1086,53 @@
       }
 
       .btn {
-        padding: 10px 20px;
-        font-size: 1em;
+        padding: 8px 16px;
+        font-size: 0.9em;
       }
 
       .container {
         padding: 0 10px;
       }
 
-      .contact-details,
-      .contact-form {
+      .contact-details {
         padding: 20px;
+      }
+
+      .testimonials-slideshow {
+        padding: 0 10px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .logo-container img {
+        width: 45px;
+        height: 45px;
+      }
+
+      header h1 {
+        font-size: 1em;
+      }
+
+      .hamburger {
+        font-size: 1.2em;
+      }
+
+      nav ul li a,
+      .hamburger-menu ul li a {
+        font-size: 0.75em;
+        padding: 5px 10px;
+      }
+
+      .slideshow-container {
+        height: 250px;
+      }
+
+      .slide-content h2 {
+        font-size: 1.8em;
+      }
+
+      .slide-content p {
+        font-size: 1em;
       }
     }
   </style>
@@ -816,8 +1150,6 @@
         <img src="web_logo.jpeg" alt="PRANIX Logo" loading="lazy">
         <h1>PRANIX</h1>
       </div>
-      <button class="hamburger" aria-label="Toggle navigation">☰</button>
-      <input type="checkbox" id="nav-toggle" aria-hidden="true">
       <nav>
         <ul>
           <li><a href="#home" class="active">Home</a></li>
@@ -826,14 +1158,30 @@
           <li><a href="#gov-scheme">Gov-Scheme</a></li>
           <li><a href="#wellness">Wellness</a></li>
           <li><a href="#diy">DIY</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li>
+            <div class="dark-mode-toggle">
+              <i class="fas fa-sun"></i>
+              <i class="fas fa-moon"></i>
+            </div>
+          </li>
+          <li>
+            <button class="hamburger" aria-label="Toggle hamburger menu">☰</button>
+          </li>
         </ul>
+        <div class="hamburger-menu">
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#privacy-policy">Privacy Policy</a></li>
+            <li><a href="#nearby-medical-shops">Nearby Medical Shops</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
       </nav>
     </div>
   </header>
 
   <!-- Home Section with Slideshow -->
-  <section id="home" data-aos="fade-up">
+  <section id="home" class="animate-on-scroll">
     <div class="slideshow-container">
       <div class="slide" style="background-image: url('slide_group.jpeg');">
         <div class="slide-content">
@@ -873,7 +1221,7 @@
   <a href="#contact" class="appointment-btn" aria-label="Book Appointment">Book Appointment</a>
 
   <!-- Search Section -->
-  <section id="search" data-aos="fade-up">
+  <section id="search" class="animate-on-scroll">
     <div class="container">
       <div class="search-container">
         <span class="search-icon" aria-hidden="true">🔍</span>
@@ -884,7 +1232,7 @@
   </section>
 
   <!-- Awareness Section -->
-  <section id="awareness" data-aos="fade-up">
+  <section id="awareness" class="animate-on-scroll">
     <div class="container">
       <h2>Health Awareness</h2>
       <p>Stay informed about diseases, hygiene, and healthy practices.</p>
@@ -912,7 +1260,7 @@
   </section>
 
   <!-- Telemedicine Section -->
-  <section id="telemedicine" data-aos="fade-up">
+  <section id="telemedicine" class="animate-on-scroll">
     <div class="container">
       <h2>Telemedicine Services</h2>
       <p>Access healthcare from home with consultations and medicine delivery.</p>
@@ -929,7 +1277,7 @@
           <a href="https://www.1mg.com/categories/over-the-counter-175" class="btn btn-secondary">Shop Now</a>
         </div>
         <div class="medicine-card" data-title="Prescription Drugs" data-aos="zoom-in" data-aos-delay="100">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR55bg6JOSImRgyHwHfb8iyaV6TlIVJFHLY2Q&s" alt="Prescription medications" loading="lazy">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:RX55bg6JOSImRgyHwHfb8iyaV6TlIVJFHLY2Q&s" alt="Prescription medications" loading="lazy">
           <h3>Prescription Drugs</h3>
           <p>Order prescribed medications with a valid prescription.</p>
           <a href="https://www.1mg.com/order-with-prescription/" class="btn btn-secondary">Shop Now</a>
@@ -945,7 +1293,7 @@
   </section>
 
   <!-- Government Schemes Section -->
-  <section id="gov-scheme" data-aos="fade-up">
+  <section id="gov-scheme" class="animate-on-scroll">
     <div class="container">
       <h2>Government Schemes</h2>
       <p>Explore government initiatives for healthcare and financial support.</p>
@@ -973,7 +1321,7 @@
   </section>
 
   <!-- Wellness Section -->
-  <section id="wellness" data-aos="fade-up">
+  <section id="wellness" class="animate-on-scroll">
     <div class="container">
       <h2>Wellness Tips</h2>
       <p>Improve your physical, mental, and dietary health with expert advice.</p>
@@ -1001,7 +1349,7 @@
   </section>
 
   <!-- DIY Section -->
-  <section id="diy" data-aos="fade-up">
+  <section id="diy" class="animate-on-scroll">
     <div class="container">
       <h2>DIY Health Remedies</h2>
       <p>Discover creative hacks and remedies for everyday health needs.</p>
@@ -1028,71 +1376,159 @@
     </div>
   </section>
 
-  <!-- Find Nearby (Google Maps) Section -->
-  <section id="find-nearby" data-aos="fade-up">
+  <!-- Health Tips Section -->
+  <section id="health-tips" class="animate-on-scroll">
     <div class="container">
-      <h2>Find Nearby Healthcare</h2>
-      <p>Locate doctors, medical shops, and consultation centers near you.</p>
-      <div class="map-container">
-        <div id="map"></div>
-        <iframe class="map-fallback" src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3506.233391132782!2d77.20902111507986!3d28.632354982418676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sdoctors%20near%20me!5e0!3m2!1sen!2sin!4v1634567891234!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+      <h2>Quick Health Tips</h2>
+      <p>Simple tips to boost your health and wellness.</p>
+      <div class="health-tips-grid">
+        <div class="health-tip-card">
+          <img src="hydrate.jpg" alt="Stay Hydrated" loading="lazy">
+          <h3>Stay Hydrated</h3>
+          <p>Drink at least 8 glasses of water daily to keep your body functioning optimally.</p>
+        </div>
+        <div class="health-tip-card">
+          <img src="sleep.jpg" alt="Get Enough Sleep" loading="lazy">
+          <h3>Get Enough Sleep</h3>
+          <p>Aim for 7-9 hours of sleep per night to improve mental and physical health.</p>
+        </div>
+        <div class="health-tip-card">
+          <img src="exercise.jpg" alt="Stay Active" loading="lazy">
+          <h3>Stay Active</h3>
+          <p>Engage in at least 30 minutes of moderate exercise 5 days a week.</p>
+        </div>
+        <div class="health-tip-card">
+          <img src="diet.jpg" alt="Eat Balanced Meals" loading="lazy">
+          <h3>Eat Balanced Meals</h3>
+          <p>Include a variety of fruits, vegetables, lean proteins, and whole grains in your diet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="animate-on-scroll">
+    <div class="container">
+      <h2>Testimonials</h2>
+      <p>Hear from our satisfied users about their experience with PRANIX.</p>
+      <div class="testimonials-slideshow">
+        <div class="testimonial-slide active">
+          <div class="testimonial-card">
+            <img src="user1.jpg" alt="User 1" loading="lazy">
+            <p>"PRANIX made it so easy to connect with a doctor and get my medications delivered!"</p>
+            <h4>Jane Doe</h4>
+          </div>
+        </div>
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <img src="user2.jpg" alt="User 2" loading="lazy">
+            <p>"The health tips and DIY remedies have been a game-changer for my family."</p>
+            <h4>John Smith</h4>
+          </div>
+        </div>
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <img src="user3.jpg" alt="User 3" loading="lazy">
+            <p>"Thanks to PRANIX, I learned about government schemes that helped me save on medical costs."</p>
+            <h4>Emily Johnson</h4>
+          </div>
+        </div>
+        <div class="testimonial-dots">
+          <span class="testimonial-dot active" onclick="currentTestimonial(0)"></span>
+          <span class="testimonial-dot" onclick="currentTestimonial(1)"></span>
+          <span class="testimonial-dot" onclick="currentTestimonial(2)"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="animate-on-scroll">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <p>Find answers to common questions about our services.</p>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          How do I book an online consultation? <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Navigate to the Telemedicine section, click on "Online Consultation," and follow the instructions to book an appointment with a doctor.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          Is my personal information secure? <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes, we use advanced encryption to protect your data.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          Can I order prescription medicines? <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes, you can order prescription medicines by uploading a valid prescription in the Telemedicine section.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          How do I contact support? <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>You can reach us via the Contact Us section, email at support@pranix.com, or call +123-456-7890.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Contact Us Section -->
-  <section id="contact" data-aos="fade-up">
+  <section id="contact" class="animate-on-scroll">
     <div class="container">
       <h2>Contact Us</h2>
       <p>Reach out for support, inquiries, or to connect with us.</p>
-      <div class="contact-container">
-        <div class="contact-details">
-          <h3>Get in Touch</h3>
-          <ul>
-            <li>
-              <a href="https://facebook.com" target="_blank" aria-label="Facebook">
-                <i class="fab fa-facebook-f"></i> Facebook
-              </a>
-            </li>
-            <li>
-              <a href="https://twitter.com" target="_blank" aria-label="Twitter">
-                <i class="fab fa-twitter"></i> Twitter
-              </a>
-            </li>
-            <li>
-              <a href="https://instagram.com" target="_blank" aria-label="Instagram">
-                <i class="fab fa-instagram"></i> Instagram
-              </a>
-            </li>
-            <li>
-              <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
-                <i class="fab fa-linkedin-in"></i> LinkedIn
-              </a>
-            </li>
-            <li>
-              <a href="https://wa.me/1234567890" target="_blank" aria-label="WhatsApp">
-                <i class="fab fa-whatsapp"></i> WhatsApp
-              </a>
-            </li>
-            <li>
-              <a href="mailto:support@pranix.com" aria-label="Email">
-                <i class="fas fa-envelope"></i> support@pranix.com
-              </a>
-            </li>
-            <li>
-              <a href="tel:+1234567890" aria-label="Phone">
-                <i class="fas fa-phone"></i> +123-456-7890
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="contact-form">
-          <h3>Send a Message</h3>
-          <input type="text" id="name" placeholder="Your Name" required aria-label="Name">
-          <input type="email" id="email" placeholder="Your Email" required aria-label="Email">
-          <textarea id="message" placeholder="Your Message" required aria-label="Message"></textarea>
-          <button class="btn btn-primary" onclick="submitContact()">Send</button>
-        </div>
+      <div class="contact-details">
+        <h3>Get in Touch</h3>
+        <ul>
+          <li>
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i> Facebook
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+              <i class="fab fa-twitter"></i> Twitter
+            </a>
+          </li>
+          <li>
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+              <i class="fab fa-instagram"></i> Instagram
+            </a>
+          </li>
+          <li>
+            <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i> LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/1234567890" target="_blank" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+          </li>
+          <li>
+            <a href="mailto:support@pranix.com" aria-label="Email">
+              <i class="fas fa-envelope"></i> support@pranix.com
+            </a>
+          </li>
+          <li>
+            <a href="tel:+1234567890" aria-label="Phone">
+              <i class="fas fa-phone"></i> +123-456-7890
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="contact-button-container">
+        <a href="mailto:support@pranix.com" class="btn btn-secondary">Email Us Now</a>
       </div>
     </div>
   </section>
@@ -1100,6 +1536,12 @@
   <!-- Footer -->
   <footer>
     <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3>About PRANIX</h3>
+          <p>PRANIX is dedicated to making healthcare accessible through telemedicine, health awareness, and wellness resources.</p>
+        </div>
+      </div>
       <p>© 2025 PRANIX | All Rights Reserved</p>
     </div>
   </footer>
@@ -1122,22 +1564,32 @@
 
     // Hamburger Menu Toggle
     const hamburger = document.querySelector('.hamburger');
-    const nav = document.querySelector('nav');
-    const navToggle = document.getElementById('nav-toggle');
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+
     hamburger.addEventListener('click', () => {
-      nav.classList.toggle('active');
-      navToggle.checked = !navToggle.checked;
-      hamburger.textContent = nav.classList.contains('active') ? '✕' : '☰';
+      hamburgerMenu.classList.toggle('active');
+      hamburger.textContent = hamburgerMenu.classList.contains('active') ? '✕' : '☰';
     });
 
-    // Close menu on link click
-    document.querySelectorAll('nav ul li a').forEach(link => {
+    // Close hamburger menu on link click
+    document.querySelectorAll('.hamburger-menu ul li a').forEach(link => {
       link.addEventListener('click', () => {
-        nav.classList.remove('active');
-        navToggle.checked = false;
+        hamburgerMenu.classList.remove('active');
         hamburger.textContent = '☰';
       });
     });
+
+    // Dark Mode Toggle
+    const darkModeToggle = document.querySelector('.dark-mode-toggle');
+    darkModeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    });
+
+    // Check for saved dark mode preference
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-mode');
+    }
 
     // Slideshow Functionality
     let slideIndex = 0;
@@ -1168,9 +1620,46 @@
     showSlide(slideIndex);
     setInterval(nextSlide, 5000);
 
+    // Testimonials Slideshow
+    let testimonialIndex = 0;
+    const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+    const testimonialDots = document.querySelectorAll('.testimonial-dot');
+
+    function showTestimonial(index) {
+      testimonialSlides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        testimonialDots[i].classList.remove('active');
+        if (i === index) {
+          slide.classList.add('active');
+          testimonialDots[i].classList.add('active');
+        }
+      });
+    }
+
+    function nextTestimonial() {
+      testimonialIndex = (testimonialIndex + 1) % testimonialSlides.length;
+      showTestimonial(testimonialIndex);
+    }
+
+    function currentTestimonial(index) {
+      testimonialIndex = index;
+      showTestimonial(testimonialIndex);
+    }
+
+    showTestimonial(testimonialIndex);
+    setInterval(nextTestimonial, 7000);
+
+    // FAQ Toggle
+    function toggleFAQ(element) {
+      const answer = element.nextElementSibling;
+      const toggle = element.querySelector('.faq-toggle');
+      answer.classList.toggle('active');
+      toggle.classList.toggle('active');
+    }
+
     // Content Search Filter
     function filterContent(query) {
-      const sections = document.querySelectorAll('.awareness-card, .gov-scheme-card, .medicine-card, .wellness-card, .diy-card');
+      const sections = document.querySelectorAll('.awareness-card, .gov-scheme-card, .medicine-card, .wellness-card, .diy-card, .health-tip-card, .testimonial-card');
       const feedback = document.getElementById('search-feedback');
       const querySpan = document.getElementById('query');
       let hasResults = false;
@@ -1186,21 +1675,6 @@
       });
       querySpan.textContent = query;
       feedback.classList.toggle('active', !hasResults && query.length > 0);
-    }
-
-    // Contact Form Submission
-    function submitContact() {
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const message = document.getElementById('message').value;
-      if (name && email && message) {
-        showToast('Message sent successfully!', 'success');
-        document.getElementById('name').value = '';
-        document.getElementById('email').value = '';
-        document.getElementById('message').value = '';
-      } else {
-        showToast('Please fill all fields.', 'error');
-      }
     }
 
     // Toast Notification
@@ -1219,17 +1693,26 @@
       setTimeout(() => toast.remove(), 3000);
     }
 
-    // Active Nav Highlight
+    // Active Nav Highlight and Scroll Animations
     window.addEventListener('scroll', () => {
       const sections = document.querySelectorAll('section');
-      const navLinks = document.querySelectorAll('nav ul li a');
+      const navLinks = document.querySelectorAll('nav ul li a, .hamburger-menu ul li a');
       let current = '';
+
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        if (window.scrollY >= sectionTop - 60) {
+        const sectionHeight = section.offsetHeight;
+        if (window.scrollY >= sectionTop - 60 && window.scrollY < sectionTop + sectionHeight) {
           current = section.getAttribute('id');
         }
+
+        // Trigger animations when section is in view
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.8 && rect.bottom >= 0) {
+          section.classList.add('animate-on-scroll');
+        }
       });
+
       navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href').slice(1) === current) {
@@ -1237,110 +1720,6 @@
         }
       });
     });
-  </script>
-  <!-- Google Maps API -->
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places&callback=initMap"></script>
-  <script>
-    let map, infoWindow;
-
-    function initMap() {
-      const defaultLocation = { lat: 28.632354, lng: 77.209021 }; // Default: Delhi, India
-      const mapElement = document.getElementById('map');
-      const fallbackElement = document.querySelector('.map-fallback');
-
-      try {
-        map = new google.maps.Map(mapElement, {
-          center: defaultLocation,
-          zoom: 14,
-          styles: [
-            {
-              featureType: 'poi.medical',
-              elementType: 'geometry',
-              stylers: [{ color: '#1E90FF' }]
-            }
-          ]
-        });
-        infoWindow = new google.maps.InfoWindow();
-
-        // Request user's location
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            position => {
-              const userLocation = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-              };
-              map.setCenter(userLocation);
-
-              // Add marker for user's location
-              new google.maps.Marker({
-                position: userLocation,
-                map: map,
-                title: 'Your Location',
-                icon: {
-                  url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-                }
-              });
-
-              // Search for nearby medical facilities
-              const service = new google.maps.places.PlacesService(map);
-              service.nearbySearch(
-                {
-                  location: userLocation,
-                  radius: 5000, // 5km radius
-                  type: ['hospital', 'pharmacy', 'doctor', 'health']
-                },
-                (results, status) => {
-                  if (status === google.maps.places.PlacesServiceStatus.OK) {
-                    results.forEach(place => {
-                      const marker = new google.maps.Marker({
-                        position: place.geometry.location,
-                        map: map,
-                        title: place.name,
-                        icon: {
-                          url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-                        }
-                      });
-
-                      marker.addListener('click', () => {
-                        infoWindow.setContent(`
-                          <div>
-                            <strong>${place.name}</strong><br>
-                            ${place.vicinity}
-                          </div>
-                        `);
-                        infoWindow.open(map, marker);
-                      });
-                    });
-                  } else {
-                    console.error('Places API failed:', status);
-                    showToast('Failed to load nearby places.', 'error');
-                  }
-                }
-              );
-            },
-            error => {
-              console.error('Geolocation error:', error.message);
-              showToast('Location access denied. Showing default location.', 'error');
-              map.setCenter(defaultLocation);
-              fallbackElement.style.display = 'block';
-              mapElement.style.display = 'none';
-            }
-          );
-        } else {
-          console.error('Geolocation not supported');
-          showToast('Geolocation not supported by your browser.', 'error');
-          map.setCenter(defaultLocation);
-          fallbackElement.style.display = 'block';
-          mapElement.style.display = 'none';
-        }
-      } catch (e) {
-        console.error('Map initialization failed:', e);
-        showToast('Failed to load map. Using fallback.', 'error');
-        fallbackElement.style.display = 'block';
-        mapElement.style.display = 'none';
-      }
-    }
   </script>
 </body>
 </html>
