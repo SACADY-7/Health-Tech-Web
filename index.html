@@ -600,14 +600,23 @@
     .medicine-card img,
     .wellness-card img,
     .diy-card img,
-    .health-tip-card img,
-    .testimonial-card img {
+    .health-tip-card img {
       width: 100%;
       max-width: clamp(120px, 20vw, 150px);
       height: auto;
       margin-bottom: 15px;
       border-radius: 8px;
       object-fit: cover;
+    }
+
+    .testimonial-card img {
+      width: clamp(80px, 12vw, 100px);
+      height: clamp(80px, 12vw, 100px);
+      max-width: clamp(80px, 12vw, 100px);
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 15px;
     }
 
     /* General Section Styles */
@@ -776,11 +785,6 @@
       padding: clamp(15px, 2vw, 20px);
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .testimonial-card img {
-      border-radius: 50%;
-      max-width: clamp(60px, 10vw, 80px);
     }
 
     .testimonial-card p {
@@ -1390,7 +1394,7 @@
           <p>Aim for 7-9 hours of sleep per night to improve mental and physical health.</p>
         </div>
         <div class="health-tip-card">
-          <img src="runmw.jpeg" alt="Stay Active" loading="lazy">
+          <img src="runme.jpeg" alt="Stay Active" loading="lazy">
           <h3>Stay Active</h3>
           <p>Engage in at least 30 minutes of moderate exercise 5 days a week.</p>
         </div>
@@ -1418,14 +1422,14 @@
         </div>
         <div class="testimonial-slide">
           <div class="testimonial-card">
-            <img src="pt2.jpeg" alt="User 2" loading="lazy">
+            <img src="tp2.jpeg" alt="User 2" loading="lazy">
             <p>"The health tips and DIY remedies have been a game-changer for my family."</p>
-            <h4>Sophia Smith</h4>
+            <h4>John Smith</h4>
           </div>
         </div>
         <div class="testimonial-slide">
           <div class="testimonial-card">
-            <img src="pt3.jpeg" alt="User 3" loading="lazy">
+            <img src="tp3.jpeg" alt="User 3" loading="lazy">
             <p>"Thanks to PRANIX, I learned about government schemes that helped me save on medical costs."</p>
             <h4>Emily Johnson</h4>
           </div>
