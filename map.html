@@ -63,10 +63,10 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 1rem;
-            background: #ffffff; /* Fallback background for visibility */
+            background: #ffffff;
             border-radius: 0.5rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 10; /* Ensure buttons are not hidden */
+            z-index: 10;
         }
     </style>
 </head>
@@ -76,9 +76,9 @@
         <div class="container mx-auto flex items-center justify-center">
             <div class="flex items-center space-x-4">
                 <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center overflow-hidden">
-                    <img src="https://via.placeholder.com/40" alt="Logo" class="rounded-full">
+                    <img src="ba_logo.jpeg" alt="Logo" class="rounded-full">
                 </div>
-                <h1 class="text-2xl font-bold text-white">MediFinder</h1>
+                <h1 class="text-2xl font-bold text-white">Bharat Arogya</h1>
             </div>
         </div>
     </nav>
@@ -87,13 +87,13 @@
     <main class="container mx-auto py-12 px-4">
         <!-- Button Section Before Cards -->
         <section class="button-container mb-12">
-            <button class="gradient-button text-white px-6 py-3 rounded-full font-semibold" data-filter="hospital">Nearby Hospitals</button>
-            <button class="gradient-button text-white px-6 py-3 rounded-full font-semibold" data-filter="pharmacy">Nearby Pharmacy</button>
-            <button class="gradient-button text-white px-6 py-3 rounded-full font-semibold" data-filter="jan aushadhi">Nearby Jan Aushadhi Store</button>
+            <a href="#hospitals" class="gradient-button text-white px-6 py-3 rounded-full font-semibold inline-block text-center" data-filter="hospital">Nearby Hospitals</a>
+            <a href="#pharmacies" class="gradient-button text-white px-6 py-3 rounded-full font-semibold inline-block text-center" data-filter="pharmacy">Nearby Pharmacy</a>
+            <a href="#jan-aushadhi" class="gradient-button text-white px-6 py-3 rounded-full font-semibold inline-block text-center" data-filter="jan aushadhi">Nearby Jan Aushadhi Store</a>
         </section>
 
         <!-- Hospitals Section -->
-        <section class="section-hospital rounded-lg p-8 mb-12">
+        <section id="hospitals" class="section-hospital rounded-lg p-8 mb-12">
             <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Hospitals</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
@@ -170,7 +170,7 @@
                 </div>
                 <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
                     <div class="overflow-hidden rounded-lg mb-4">
-                        <img src="https://medanta.s3.ap-south-1.amazonaws.com/hospitals/February2025/YelIyqoA5uGHAsU26kWk9EH54Aumyv-metaUGF0bmEgSG9zcGl0YWwgSW1hZ2UgKDIpLmpwZw==-.jpg" alt="Hospital" class="w-full h-40 object-cover card-image">
+                       blurred for privacy
                     </div>
                     <h3 class="text-xl font-bold text-gray-800">Medanta – The Medicity</h3>
                     <p class="text-gray-600">Specialty: Cardiology, Oncology, Neurology</p>
@@ -186,10 +186,11 @@
                     <p class="text-gray-500 mt-2">Gurgaon, Haryana</p>
                     <a href="https://www.google.com/maps/dir//Fortis+Memorial+Research+Institute,+sector+29,+Arya+Samaj+Rd,+Sector+44,+Gurugram,+Haryana+122002/@28.4571017,77.0697913,17z/data=!3m1!5s0x390d18eed8d2378b:0x6689fce908d8715d!4m8!4m7!1m0!1m5!1m1!1s0x390d18eedde088cd:0xef1fa605ec6e1d44!2m2!1d77.0723662!2d28.4571017?entry=ttu&g_ep=EgoyMDI1MDQyNy4xIKXMDSoASAFQAw%3D%3D" target="_blank" class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full inline-block text-center">Locate</a>
                 </div>
-            
+            </div>
+        </section>
 
         <!-- Clinics Section -->
-        <section class="section-clinic rounded-lg p-8 mb-12">
+        <section id="clinics" class="section-clinic rounded-lg p-8 mb-12">
             <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Clinics</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="clinic">
@@ -223,7 +224,7 @@
         </section>
 
         <!-- Pharmacies Section -->
-        <section class="section-pharmacy rounded-lg p-8 mb-12">
+        <section id="pharmacies" class="section-pharmacy rounded-lg p-8 mb-12">
             <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Pharmacies</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="pharmacy">
@@ -242,13 +243,13 @@
                     <h3 class="text-xl font-bold text-gray-800">Apollo Pharmacy</h3>
                     <p class="text-gray-600">Specialty: Prescription & OTC Drugs</p>
                     <p class="text-gray-500 mt-2">Hyderabad, Telangana</p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Apollo+Pharmacy,+Hyderabad,+Telangana" target="_blank" class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full inline-block text-center">Locate</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Apollo+Pharmacy,+Hyderabad,+Telangana" target="_blank" class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm UyM6J6tY font-semibold w-full inline-block text-center">Locate</a>
                 </div>
             </div>
         </section>
 
         <!-- Jan Aushadhi Stores Section -->
-        <section class="section-jan-aushadhi rounded-lg p-8 mb-12">
+        <section id="jan-aushadhi" class="section-jan-aushadhi rounded-lg p-8 mb-12">
             <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Jan Aushadhi Stores</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="jan aushadhi">
@@ -273,7 +274,7 @@
         </section>
 
         <!-- Other Medical Services Section -->
-        <section class="section-other rounded-lg p-8 mb-12">
+        <section id="other" class="section-other rounded-lg p-8 mb-12">
             <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Other Medical Services</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="other">
@@ -298,8 +299,8 @@
         </section>
 
         <!-- Go Back Button -->
-        <section class="flex justify-center mt-12">
-            <button class="go-back-button text-white px-8 py-3 rounded-full font-semibold text-lg" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Go Back</button>
+        <section class="flex justify-center items-center mt-12 mb-12">
+            <button class="go-back-button text-white px-8 py-3 rounded-full font-semibold text-lg" onclick="history.back()">Go Back</button>
         </section>
     </main>
 
@@ -310,7 +311,8 @@
         const sections = document.querySelectorAll('section[class*="section-"]');
 
         buttons.forEach(button => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault(); // Prevent default anchor behavior
                 const filter = button.getAttribute('data-filter');
 
                 // Show/hide cards
