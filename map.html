@@ -3,312 +3,386 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nearby Medical Services - Pranix</title>
-    <!-- Font Awesome CDN for custom icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>MediFinder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #e6f0fa 0%, #f3e8ff 100%);
-            min-height: 100vh;
+        .gradient-nav {
+            background: linear-gradient(90deg, #a5b4fc, #60a5fa);
         }
-
-        /* Navigation Bar */
-        nav {
-            background: linear-gradient(90deg, #007bff, #6b48ff);
-            padding: 15px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
         }
-
-        .nav-logo {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 15px;
-            background-color: #fff;
+        .gradient-button {
+            background: linear-gradient(45deg, #34d399, #60a5fa);
+            transition: all 0.3s ease;
+        }
+        .gradient-button:hover {
+            background: linear-gradient(45deg, #22d3ee, #3b82f6);
+            transform: scale(1.05);
+        }
+        .card-image {
             transition: transform 0.3s ease;
         }
-
-        .nav-logo:hover {
-            transform: scale(1.1);
-        }
-
-        .nav-title {
-            color: white;
-            font-size: 28px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-title i {
-            margin-right: 10px;
-            font-size: 24px;
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(180deg, #ffffff 0%, #e9f1ff 100%);
-            border-bottom: 1px solid #d0e0ff;
-            animation: fadeIn 1s ease-in;
-        }
-
-        .hero h1 {
-            font-size: 40px;
-            color: #0056b3;
-            margin-bottom: 10px;
-        }
-
-        .hero p {
-            font-size: 18px;
-            color: #555;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Content Section */
-        .content {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .content-block {
-            background-color: white;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        .content-block h2 {
-            font-size: 26px;
-            color: #007bff;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
-
-        .content-block h2 i {
-            margin-right: 10px;
-            font-size: 24px;
-            color: #6b48ff;
-        }
-
-        .content-block p {
-            font-size: 16px;
-            color: #444;
-        }
-
-        /* Map Section */
-        #map {
-            height: 500px;
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            margin: 20px 0;
-            opacity: 0;
-            animation: fadeIn 1.2s ease forwards;
-            animation-delay: 0.4s;
-        }
-
-        /* Go Back Button */
-        .go-back {
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        .go-back button {
-            padding: 12px 30px;
-            background-color: #6b48ff;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-        }
-
-        .go-back button i {
-            margin-right: 8px;
-        }
-
-        .go-back button:hover {
-            background-color: #0056b3;
+        .card-hover:hover .card-image {
             transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
-
-        /* Footer */
-        footer {
-            background: linear-gradient(90deg, #007bff, #6b48ff);
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
+        body {
+            background: linear-gradient(135deg, #f0f9ff, #f5f3ff);
         }
-
-        footer p {
-            margin: 0;
-            font-size: 14px;
+        .section-hospital {
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
         }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .section-clinic {
+            background: linear-gradient(135deg, #f0fdf4, #d9f99d);
         }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .section-pharmacy {
+            background: linear-gradient(135deg, #fefce8, #fef9c3);
         }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 32px;
-            }
-
-            .hero p {
-                font-size: 16px;
-            }
-
-            .content-block h2 {
-                font-size: 22px;
-            }
-
-            .content-block p {
-                font-size: 14px;
-            }
-
-            .nav-title {
-                font-size: 24px;
-            }
-
-            .nav-logo {
-                width: 40px;
-                height: 40px;
-            }
-
-            #map {
-                height: 300px;
-            }
+        .section-jan-aushadhi {
+            background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+        }
+        .section-other {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+        }
+        .go-back-button {
+            background: linear-gradient(45deg, #f87171, #f472b6);
+        }
+        .go-back-button:hover {
+            background: linear-gradient(45deg, #ef4444, #ec4899);
+            transform: scale(1.05);
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
     </style>
 </head>
-<body>
-    <nav>
-        <div class="nav-container">
-            <!-- Attach your logo image here by replacing 'logo.png' with your image file (e.g., 'pranix-logo.png'). Ensure the image is square (e.g., 100x100 pixels) for a perfect circle. Place the image file in the same folder as this HTML file. -->
-            <img src="ba_logo.jpeg" alt="Pranix Logo" class="nav-logo">
-            <span class="nav-title"><i class="fas fa-home"></i> Bharat Arogya</span>
+<body class="font-sans min-h-screen">
+    <!-- Navigation Bar -->
+    <nav class="gradient-nav p-4 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex items-center justify-center">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center overflow-hidden">
+                    <img src="https://via.placeholder.com/40" alt="Logo" class="rounded-full">
+                </div>
+                <h1 class="text-2xl font-bold text-white">MediFinder</h1>
+            </div>
         </div>
     </nav>
-    <main>
-        <section class="hero">
-            <h1>Nearby Medical Services</h1>
-            <p>Explore medical shops, hospitals, and clinics near you with our interactive map.</p>
+
+    <!-- Main Content -->
+    <main class="container mx-auto py-12 px-4">
+        <!-- Button Section Before Cards -->
+        <section class="button-container mb-12">
+            <button class="gradient-button text-white px-6 py-3 rounded-full font-semibold" data-filter="hospital">Nearby Hospitals</button>
+            <button class="gradient-button text-white px-6 py-3 rounded-full font-semibold" data-filter="pharmacy">Nearby Pharmacy</button>
+            <button class="gradient-button text-white px-6 py-3 rounded-full font-semibold" data-filter="jan aushadhi">Nearby Jan Aushadhi Store</button>
         </section>
-        <section class="content">
-            <div class="content-block">
-                <h2><i class="fas fa-map-marked-alt"></i> Find Healthcare Facilities</h2>
-                <p>Locate nearby medical shops, hospitals, pharmacies, and clinics. Click on map markers to view details and navigate to your desired location.</p>
-                <div id="map"></div>
+
+        <!-- Hospitals Section -->
+        <section class="section-hospital rounded-lg p-8 mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Hospitals</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://content.jdmagicbox.com/comp/varanasi/r6/0542px542.x542.000241147735.l5r6/catalogue/heritage-hospitals-ltd-lanka-varanasi-hospitals-aavw5vaoza.jpg" alt="Hospital" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Heritage Hospitals</h3>
+                    <p class="text-gray-600">Specialty: Cardiology, Neurology, Orthopedics</p>
+                    <p class="text-gray-500 mt-2">Lanka, Varanasi, Uttar Pradesh</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Hospital" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Sir Sunderlal Hospital (BHU)</h3>
+                    <p class="text-gray-600">Specialty: General Medicine, Surgery, Pediatrics</p>
+                    <p class="text-gray-500 mt-2">Sunderpur, Varanasi, Uttar Pradesh</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Hospital" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Apex Super Specialty Hospital</h3>
+                    <p class="text-gray-600">Specialty: Orthopedics, Joint Replacement, Trauma</p>
+                    <p class="text-gray-500 mt-2">Hydel Rd, Varanasi, Uttar Pradesh</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Hospital" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Varanasi Hospital and Medical Research Centre</h3>
+                    <p class="text-gray-600">Specialty: Laparoscopic Surgery, Cardiology</p>
+                    <p class="text-gray-500 mt-2">Bhelupur, Varanasi, Uttar Pradesh</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Hospital" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Madan Mohan Malaviya Cancer Centre</h3>
+                    <p class="text-gray-600">Specialty: Oncology, Radiation Therapy</p>
+                    <p class="text-gray-500 mt-2">Sunderpur, Varanasi, Uttar Pradesh</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Hospital" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Homi Bhabha Cancer Hospital</h3>
+                    <p class="text-gray-600">Specialty: Oncology, Chemotherapy</p>
+                    <p class="text-gray-500 mt-2">Lahartara, Varanasi, Uttar Pradesh</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Hospital" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Sahara Hospital</h3>
+                    <p class="text-gray-600">Specialty: General Surgery, Gynecology</p>
+                    <p class="text-gray-500 mt-2">Sigra, Varanasi, Uttar Pradesh</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Hospital" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">AIIMS Delhi</h3>
+                    <p class="text-gray-600">Specialty: Cardiology, Neurology, Oncology</p>
+                    <p class="text-gray-500 mt-2">Ansari Nagar, New Delhi</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Hospital" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Medanta – The Medicity</h3>
+                    <p class="text-gray-600">Specialty: Cardiology, Oncology, Neurology</p>
+                    <p class="text-gray-500 mt-2">Gurgaon, Haryana</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Hospital" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Fortis Memorial Research Institute</h3>
+                    <p class="text-gray-600">Specialty: Cardiology, Oncology, Orthopedics</p>
+                    <p class="text-gray-500 mt-2">Gurgaon, Haryana</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Hospital" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Artemis Hospital</h3>
+                    <p class="text-gray-600">Specialty: Neurosurgery, Cardiology, Urology</p>
+                    <p class="text-gray-500 mt-2">Gurgaon, Haryana</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Hospital" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Apollo Hospitals</h3>
+                    <p class="text-gray-600">Specialty: Cardiology, Orthopedics, Gastroenterology</p>
+                    <p class="text-gray-500 mt-2">Chennai, Tamil Nadu</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Hospital" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Narayana Health City</h3>
+                    <p class="text-gray-600">Specialty: Cardiology, Pediatrics, Oncology</p>
+                    <p class="text-gray-500 mt-2">Bengaluru, Karnataka</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Hospital" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Kokilaben Dhirubhai Ambani Hospital</h3>
+                    <p class="text-gray-600">Specialty: Oncology, Neurology, Orthopedics</p>
+                    <p class="text-gray-500 mt-2">Mumbai, Maharashtra</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Hospital" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">PGIMER</h3>
+                    <p class="text-gray-600">Specialty: Cardiology, Nephrology, Endocrinology</p>
+                    <p class="text-gray-500 mt-2">Chandigarh, Punjab</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Hospital" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Christian Medical College</h3>
+                    <p class="text-gray-600">Specialty: General Medicine, Surgery, Neurology</p>
+                    <p class="text-gray-500 mt-2">Vellore, Tamil Nadu</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="hospital">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Hospital" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Aster Medcity</h3>
+                    <p class="text-gray-600">Specialty: Cardiology, Oncology, Gastroenterology</p>
+                    <p class="text-gray-500 mt-2">Kochi, Kerala</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
             </div>
         </section>
-        <section class="go-back">
-            <button onclick="history.back()"><i class="fas fa-arrow-left"></i> Go Back</button>
+
+        <!-- Clinics Section -->
+        <section class="section-clinic rounded-lg p-8 mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Clinics</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="clinic">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Clinic" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Sankalp Clinic</h3>
+                    <p class="text-gray-600">Specialty: Gynecology, Obstetrics</p>
+                    <p class="text-gray-500 mt-2">Varanasi, Uttar Pradesh</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="clinic">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Clinic" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Apollo Clinic</h3>
+                    <p class="text-gray-600">Specialty: General Medicine, Pediatrics</p>
+                    <p class="text-gray-500 mt-2">Bengaluru, Karnataka</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="clinic">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Clinic" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Fortis La Femme Clinic</h3>
+                    <p class="text-gray-600">Specialty: Orthopedics, Physiotherapy</p>
+                    <p class="text-gray-500 mt-2">Kolkata, West Bengal</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pharmacies Section -->
+        <section class="section-pharmacy rounded-lg p-8 mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Pharmacies</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="pharmacy">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Pharmacy" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">MedPlus Pharmacy</h3>
+                    <p class="text-gray-600">Specialty: Prescription & OTC Drugs</p>
+                    <p class="text-gray-500 mt-2">Mumbai, Maharashtra</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="pharmacy">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Pharmacy" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Apollo Pharmacy</h3>
+                    <p class="text-gray-600">Specialty: Prescription & OTC Drugs</p>
+                    <p class="text-gray-500 mt-2">Hyderabad, Telangana</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Jan Aushadhi Stores Section -->
+        <section class="section-jan-aushadhi rounded-lg p-8 mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Jan Aushadhi Stores</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="jan aushadhi">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Jan Aushadhi" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Pradhan Mantri Bhartiya Janaushadhi Kendra</h3>
+                    <p class="text-gray-600">Specialty: Affordable Generic Medicines</p>
+                    <p class="text-gray-500 mt-2">Chennai, Tamil Nadu</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="jan aushadhi">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Jan Aushadhi" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Pradhan Mantri Bhartiya Janaushadhi Kendra</h3>
+                    <p class="text-gray-600">Specialty: Affordable Generic Medicines</p>
+                    <p class="text-gray-500 mt-2">Varanasi, Uttar Pradesh</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Other Medical Services Section -->
+        <section class="section-other rounded-lg p-8 mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Other Medical Services</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="other">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Diagnostic Center" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Thyrocare Diagnostics</h3>
+                    <p class="text-gray-600">Specialty: Pathology, Radiology</p>
+                    <p class="text-gray-500 mt-2">Hyderabad, Telangana</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover" data-type="other">
+                    <div class="overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300x150" alt="Diagnostic Center" class="w-full h-40 object-cover card-image">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">SRL Diagnostics</h3>
+                    <p class="text-gray-600">Specialty: Pathology, Radiology</p>
+                    <p class="text-gray-500 mt-2">Delhi, New Delhi</p>
+                    <button class="gradient-button text-white px-4 py-2 mt-4 rounded-full text-sm font-semibold w-full">Locate</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Go Back Button -->
+        <section class="flex justify-center mt-12">
+            <button class="go-back-button text-white px-8 py-3 rounded-full font-semibold text-lg" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Go Back</button>
         </section>
     </main>
-    <footer>
-        <p>© 2025 Bharat Arogya All rights reserved.</p>
-    </footer>
-    <!-- Google Maps API Script -->
+
+    <!-- JavaScript for Dynamic Filtering -->
     <script>
-        function initMap() {
-            // Default center (e.g., New York City)
-            const center = { lat: 40.7128, lng: -74.0060 };
-            // Initialize map
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 12,
-                center: center,
-            });
-            // Example markers for medical facilities
-            const locations = [
-                { lat: 40.7128, lng: -74.0060, title: "City Pharmacy", type: "Pharmacy" },
-                { lat: 40.7198, lng: -74.0100, title: "Downtown Hospital", type: "Hospital" },
-                { lat: 40.7058, lng: -74.0020, title: "Health Clinic", type: "Clinic" },
-                { lat: 40.7150, lng: -74.0080, title: "Main Street Medical Shop", type: "Medical Shop" },
-            ];
-            // Add markers to map
-            locations.forEach(location => {
-                const marker = new google.maps.Marker({
-                    position: { lat: location.lat, lng: location.lng },
-                    map: map,
-                    title: location.title,
-                    icon: {
-                        url: location.type === "Hospital" ? "http://maps.google.com/mapfiles/ms/icons/hospital.png" :
-                             location.type === "Pharmacy" ? "http://maps.google.com/mapfiles/ms/icons/pharmacy.png" :
-                             location.type === "Medical Shop" ? "http://maps.google.com/mapfiles/ms/icons/shopping.png" :
-                             "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
-                    },
+        const buttons = document.querySelectorAll('.gradient-button');
+        const cards = document.querySelectorAll('.card-hover');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.getAttribute('data-filter');
+                cards.forEach(card => {
+                    const cardType = card.getAttribute('data-type');
+                    card.style.display = (cardType === filter) ? 'block' : 'none';
                 });
-                // Add info window for each marker
-                const infoWindow = new google.maps.InfoWindow({
-                    content: `<h3>${location.title}</h3><p>Type: ${location.type}</p>`,
-                });
-                marker.addListener("click", () => {
-                    infoWindow.open(map, marker);
+                document.querySelectorAll('section').forEach(section => {
+                    const sectionType = section.classList[0].split('-')[1];
+                    section.style.display = (filter === sectionType) ? 'block' : 'none';
                 });
             });
-            // Use Geolocation to center map on user's location
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(position => {
-                    const userLocation = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                    };
-                    map.setCenter(userLocation);
-                    new google.maps.Marker({
-                        position: userLocation,
-                        map: map,
-                        title: "Your Location",
-                        icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-                    });
-                }, () => {
-                    console.log("Geolocation failed or permission denied.");
-                });
-            }
-        }
+        });
+
+        // Show hospitals by default
+        document.querySelector('[data-filter="hospital"]').click();
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
 </body>
 </html>
